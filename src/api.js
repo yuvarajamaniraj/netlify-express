@@ -6,7 +6,7 @@ var nodemailer = require('nodemailer');
 const app = express();
 const cors = require('cors');
 const router = express.Router();
-
+app.use(cors());
 const otpGen = () => {
   var digits = '0123456789';
   let OTP = '';
@@ -172,14 +172,14 @@ router.post("/login", (req, res) => {
   
 });
 
-router.get("/", (req, res) => {
+app.get("/.netlify/functions/api/", (req, res) => {
   res.json({
     Responses: "Api connection works properly!"
   });
 });
 
-router.use(cors());
-app.use(`/.netlify/functions/api`, router);
+
+// app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
