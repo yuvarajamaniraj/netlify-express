@@ -171,13 +171,14 @@ router.post("/login", (req, res) => {
   })
   
 });
+
 router.get("/", (req, res) => {
   res.json({
     Responses: "Api connection works properly!"
   });
 });
 
-app.use(cors());
+router.use(cors());
 app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
