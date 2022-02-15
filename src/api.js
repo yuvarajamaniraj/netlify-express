@@ -5,7 +5,6 @@ var nodemailer = require('nodemailer');
 
 const app = express();
 const cors = require('cors');
-const router = express.Router();
 app.use(cors());
 const otpGen = () => {
   var digits = '0123456789';
@@ -24,7 +23,7 @@ const db = mysql.createConnection({
   port: "3306",
 });
 
-router.post("/register", (req, res) => {
+router.post("/.netlify/functions/api/register", (req, res) => {
   const { email, password } = req.body;
   const verified = false;
   const otp = '';
@@ -62,7 +61,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/verifyOtp", (req, res) => {
+router.post("/.netlify/functions/api/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
 const verified = false;
 // console.log(otp);
@@ -86,7 +85,7 @@ db.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and o
 });
 });
 
-router.post(("/mail"),async (req,res)=>{
+router.post(("/.netlify/functions/api/mail"),async (req,res)=>{
 const tomail=req.body.tomail
 let localPart = tomail.split('@');
 const newOtp = otpGen(); 
@@ -131,7 +130,7 @@ transporter.sendMail(mailOptions, function(error, info){
 })
 
 
-router.post("/login", (req, res) => {
+router.post("/.netlify/functions/api/login", (req, res) => {
   const { email, password } = req.body;
   const resResult = "";
   db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
