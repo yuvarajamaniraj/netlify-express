@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 
 const app = express();
 const cors = require('cors');
-app.use(cors());
+app.use(cors({origin: 'null'}));
 const otpGen = () => {
   var digits = '0123456789';
   let OTP = '';
