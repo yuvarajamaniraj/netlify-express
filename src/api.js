@@ -5,7 +5,8 @@ var nodemailer = require('nodemailer');
 
 const app = express();
 const cors = require('cors');
-app.use(cors({origin: 'null'}));
+const router = express.Router();
+
 const otpGen = () => {
   var digits = '0123456789';
   let OTP = '';
@@ -23,7 +24,7 @@ const db = mysql.createConnection({
   port: "3306",
 });
 
-router.post("/.netlify/functions/api/register", (req, res) => {
+router.post("/register", (req, res) => {
   const { email, password } = req.body;
   const verified = false;
   const otp = '';
@@ -61,7 +62,7 @@ router.post("/.netlify/functions/api/register", (req, res) => {
   });
 });
 
-router.post("/.netlify/functions/api/verifyOtp", (req, res) => {
+router.post("/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
 const verified = false;
 // console.log(otp);
@@ -85,7 +86,7 @@ db.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and o
 });
 });
 
-router.post(("/.netlify/functions/api/mail"),async (req,res)=>{
+router.post(("/mail"),async (req,res)=>{
 const tomail=req.body.tomail
 let localPart = tomail.split('@');
 const newOtp = otpGen(); 
@@ -130,8 +131,7 @@ transporter.sendMail(mailOptions, function(error, info){
 })
 
 
-router.post("/.netlify/functions/api/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+router.post("/login", (req, res) => {
   const { email, password } = req.body;
   const resResult = "";
   db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
@@ -172,14 +172,14 @@ router.post("/.netlify/functions/api/login", (req, res) => {
   
 });
 
-app.get("/.netlify/functions/api/", (req, res) => {
+router.get("/", (req, res) => {
   res.json({
     Responses: "Api connection works properly!"
   });
 });
 
-
-// app.use(`/.netlify/functions/api`, router);
+app.use(cors({origin: 'null'}));
+app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
