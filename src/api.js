@@ -131,6 +131,7 @@ transporter.sendMail(mailOptions, function(error, info){
 
 
 router.post("/.netlify/functions/api/login", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   const { email, password } = req.body;
   const resResult = "";
   db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
