@@ -179,7 +179,7 @@ router.get("/", (req, res) => {
   });
 });
 
-app.use(cors({origin: 'https://yuvarajamaniraj.netlify.app/'}));
+app.use(cors({origin: 'https://yuvarajamaniraj.netlify.app'}));
 app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
