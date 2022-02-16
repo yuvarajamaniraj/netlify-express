@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  res.json("post Req Works")
+  res.json({ ReqStatus: "post Req Works"})
   
 });
 
