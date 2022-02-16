@@ -79,7 +79,7 @@ db.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and o
         console.log(err);
       } else {
         result = JSON.parse(JSON.stringify(result))
-        res.send(result);
+        res.json(result);
       }
     })
   }
@@ -159,12 +159,12 @@ router.post("/login", (req, res) => {
           }
           else{
             result = JSON.parse(JSON.stringify(result));
-            res.send(result)
+            res.json(result)
           }
         })
       }
       else {
-        res.send({user: "email does not exists"})
+        res.json({user: "email does not exists"})
       }
     }
     // console.log(val)
