@@ -61,7 +61,8 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  res.json({ username: email})
+  var val = email;
+  res.json({ username: val})
   
 });
 
