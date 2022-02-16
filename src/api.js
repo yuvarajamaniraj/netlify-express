@@ -25,6 +25,7 @@ const db = mysql.createConnection({
 });
 
 router.post("/register", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   const { email, password } = req.body;
   const verified = false;
   const otp = '';
@@ -159,11 +160,13 @@ router.post("/login", (req, res) => {
           }
           else{
             result = JSON.parse(JSON.stringify(result));
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.json(result)
           }
         })
       }
       else {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({user: "email does not exists"})
       }
     }
@@ -174,6 +177,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.json({
     Responses: "Api connection works properly!"
   });
