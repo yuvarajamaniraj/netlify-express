@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  res.send({"email":email, "password": password})
+  res.json({"email":email, "password": password})
 });
 
 router.post("/verifyOtp", (req, res) => {
