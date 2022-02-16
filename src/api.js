@@ -61,7 +61,7 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  res.json({ username: 'Flavio' })
+  res.json({ username: email, pass: password })
   
 });
 
