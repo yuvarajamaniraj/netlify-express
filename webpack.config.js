@@ -1,0 +1,3 @@
+optimization: {
+    minimize: false
+}
