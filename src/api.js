@@ -30,7 +30,6 @@ const db_con = mysql.createPool({
   wait_timeout : 28800,
   connect_timeout :10
 });
-configureExpress(db_con);
 
 const db = mysql.createConnection({
   user: "sql5473021",
