@@ -32,16 +32,16 @@ const db_con = mysql.createPool({
 });
 
 const db = mysql.createConnection({
-  user: "sql5473021",
-  host: "sql5.freesqldatabase.com",
-  password: "rvx9vEWTW6",
-  database: "sql5473021",
+  user: "y39M6kKqGw",
+  host: "remotemysql.com",
+  password: "rCDaLTRaap",
+  database: "y39M6kKqGw",
   port: "3306",
 });
 
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  db_con.query('SELECT email FROM users', 
+  db.query('SELECT email FROM users', 
   (err, result) => {
     if(err){
       res.json({db_error: err});
