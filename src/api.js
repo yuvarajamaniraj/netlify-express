@@ -67,8 +67,7 @@ router.post("/register", (req, res) => {
       // }
     }
   }
-  });
-  res.send(req.body)
+  // res.send(req.body)
 });
 
 router.post("/verifyOtp", (req, res) => {
