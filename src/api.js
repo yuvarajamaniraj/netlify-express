@@ -6,6 +6,7 @@ var nodemailer = require('nodemailer');
 const app = express();
 const cors = require('cors');
 app.use(cors())
+app.options('/register', cors())
 const router = express.Router();
 
 const otpGen = () => {
