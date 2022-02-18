@@ -25,7 +25,11 @@ const db = mysql.createConnection({
 });
 
 router.post("/register", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.set({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': "*",
+    'Access-Control-Allow-Headers': "Authorization, Content-Type"
+  })
   const { email, password } = req.body;
   const verified = false;
   const otp = '';
@@ -61,8 +65,6 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  var val = email;
-  res.json({ username: val})
   
 });
 
