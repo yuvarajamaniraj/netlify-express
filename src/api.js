@@ -55,21 +55,21 @@ router.post("/register", (req, res) => {
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  pool.query(`SELECT * FROM users WHERE email='${email}'`,
+  var bodyStr = '';
+      req.on("data",function(chunk){
+          bodyStr += chunk.toString();
+      });
+      req.on("end",function(){
+        values = JSON.stringify(bodyStr);
+      });
+  pool.query(`SELECT * FROM users WHERE email='${values["email"]}'`,
   (err, result) => {
     if (err){
       res.send({error: err});
       // throw err;
     }
     else{
-      res.json(req.body);
-      // var bodyStr = '';
-      // req.on("data",function(chunk){
-      //     bodyStr += chunk.toString();
-      // });
-      // req.on("end",function(){
-      //     res.send(JSON.stringify(bodyStr));
-      // });
+      res.send(result)
       // result = JSON.parse(JSON.stringify(result));
       // res.send({emailid: email, passz: password, res: result});
       // var val;
