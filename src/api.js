@@ -31,7 +31,7 @@ router.get("/check_db_con", (req, res) => {
     if (err) throw err;
     else{
       // res.send(result)
-      db.query('SELECT email FROM users', 
+      pool.query('SELECT email FROM users', 
       (err, result) => {
         if(err){
           res.json({db_error: err});
