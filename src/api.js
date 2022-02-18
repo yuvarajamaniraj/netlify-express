@@ -52,7 +52,7 @@ router.post("/register", (req, res) => {
     'Access-Control-Allow-Headers': "Authorization, Content-Type"
   })
   const { email, password } = req.body;
-  const value = JSON.parse(req.body)
+  const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
   pool.query(`SELECT * FROM users WHERE email='${email}'`,
@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      value.forEach(element => {
+      values.forEach(element => {
         if(element.Key == "email"){
           email = element.value;
         } else {
