@@ -17,6 +17,20 @@ const otpGen = () => {
   }
   return OTP;
 }
+const db_con = mysql.createPool({
+  connectionLimit : 100,
+  waitForConnections : true,
+  queueLimit :0,
+  host     : 'sql5.freesqldatabase.com',
+  user     : 'sql5473021',
+  password : 'rvx9vEWTW6',
+  database : 'sql5473021',
+  port     : '3306',
+  debug    :  true,
+  wait_timeout : 28800,
+  connect_timeout :10
+});
+configureExpress(db_con);
 
 const db = mysql.createConnection({
   user: "sql5473021",
@@ -28,7 +42,7 @@ const db = mysql.createConnection({
 
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  db.query('SELECT email FROM users', 
+  db_con.query('SELECT email FROM users', 
   (err, result) => {
     if(err){
       res.json({db_error: err});
