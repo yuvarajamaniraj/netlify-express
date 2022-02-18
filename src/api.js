@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      req.json(req.body);
+      res.json(req.body);
       // var bodyStr = '';
       // req.on("data",function(chunk){
       //     bodyStr += chunk.toString();
