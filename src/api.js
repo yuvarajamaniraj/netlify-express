@@ -39,7 +39,8 @@ router.post("/register", (req, res) => {
   db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
   (err, result) => {
     if (err){
-      throw err;
+      res.send({error: err});
+      // throw err;
     }
     else{
       result = JSON.parse(JSON.stringify(result));
