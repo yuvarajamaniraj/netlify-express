@@ -31,6 +31,15 @@ const db_con = mysql.createPool({
   connect_timeout :10
 });
 
+var pool = mysql.createPool({
+  connectionLimit : 100,
+  host     : 'remotemysql.com',
+  port     :  3306,
+  user     : 'y39M6kKqGw',
+  password : 'rCDaLTRaap',
+  database : 'y39M6kKqGw',
+});
+
 const db = mysql.createConnection({
   host: "remotemysql.com",
   user: "y39M6kKqGw",
@@ -43,7 +52,7 @@ const db = mysql.createConnection({
 
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  db.connect(function(err,result) {
+  pool.connect(function(err,result) {
     if (err) throw err;
     else{
       res.send(result)
