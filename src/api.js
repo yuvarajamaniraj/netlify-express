@@ -32,24 +32,33 @@ const db_con = mysql.createPool({
 });
 
 const db = mysql.createConnection({
-  user: "y39M6kKqGw",
+  username: "y39M6kKqGw",
   host: "remotemysql.com",
   password: "rCDaLTRaap",
   database: "y39M6kKqGw",
   port: "3306",
 });
 
+
+
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  db.query('SELECT email FROM users', 
-  (err, result) => {
-    if(err){
-      res.json({db_error: err});
-    }
-    else {
-      res.status(200).json(result);
+  db.connect(function(err) {
+    if (err) throw err;
+    else{
+     
+      db.query('SELECT email FROM users', 
+      (err, result) => {
+        if(err){
+          res.json({db_error: err});
+        }
+        else {
+          res.status(200).json(result);
+        }
+      });
     }
   });
+  
 });
 
 router.post("/register", (req, res) => {
