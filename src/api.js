@@ -62,12 +62,12 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      values.forEach(element => {
-        if(element.Key == "email"){
-          email = element.value;
-        } else {
-          password = element.value;
-        }
+      var bodyStr = '';
+      req.on("data",function(chunk){
+          bodyStr += chunk.toString();
+      });
+      req.on("end",function(){
+          res.send(bodyStr);
       });
       // result = JSON.parse(JSON.stringify(result));
       // res.send({emailid: email, passz: password, res: result});
@@ -92,7 +92,7 @@ router.post("/register", (req, res) => {
       // else {
       //   res.send({userExists: 1})
       // }
-      res.send({em: email, pzx: password})
+      // res.send({em: email, pzx: password})
     }
   })
 });
