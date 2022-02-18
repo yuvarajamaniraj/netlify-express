@@ -43,7 +43,7 @@ router.post("/register", (req, res) => {
     }
     else{
       result = JSON.parse(JSON.stringify(result));
-      res.send(result)
+      res.status(200).send(result)
       // var val;
       // for (var key in result) {
       //   val = result[key];
