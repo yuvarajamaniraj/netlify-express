@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      // result = JSON.parse(JSON.stringify(result));
+      result = JSON.parse(JSON.stringify(result));
       res.send(result)
       // var val;
       // for (var key in result) {
