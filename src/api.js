@@ -62,13 +62,14 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      var bodyStr = '';
-      req.on("data",function(chunk){
-          bodyStr += chunk.toString();
-      });
-      req.on("end",function(){
-          res.send(JSON.stringify(req.body));
-      });
+      req.json(req.body);
+      // var bodyStr = '';
+      // req.on("data",function(chunk){
+      //     bodyStr += chunk.toString();
+      // });
+      // req.on("end",function(){
+      //     res.send(JSON.stringify(bodyStr));
+      // });
       // result = JSON.parse(JSON.stringify(result));
       // res.send({emailid: email, passz: password, res: result});
       // var val;
