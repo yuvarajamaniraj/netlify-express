@@ -31,8 +31,7 @@ const db_con = mysql.createPool({
   connect_timeout :10
 });
 
-var pool = mysql.createPool({
-  connectionLimit : 100,
+var pool = mysql.createConnection({
   host     : 'remotemysql.com',
   port     :  3306,
   user     : 'y39M6kKqGw',
