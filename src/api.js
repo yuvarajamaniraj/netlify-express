@@ -31,14 +31,11 @@ router.get("/check_db_con", (req, res) => {
   db.query('SELECT email FROM users', 
   (err, result) => {
     if(err){
-      res.send({db_error: err});
+      res.json({db_error: err});
     }
     else {
-      res.status(200).send(result);
+      res.status(200).json(result);
     }
-  });
-  res.json({
-    Responses: "Api connection works properly!"
   });
 });
 
