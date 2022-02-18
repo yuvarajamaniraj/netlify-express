@@ -62,7 +62,7 @@ router.post("/register", (req, res) => {
       req.on("end",function(){
         values = JSON.stringify(bodyStr);
       });
-  pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj@gmail.com`,
+  pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj'@'gmail.com`,
   (err, result) => {
     if (err){
       res.send({error: err});
