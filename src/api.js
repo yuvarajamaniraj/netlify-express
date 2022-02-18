@@ -66,7 +66,7 @@ router.post("/register", (req, res) => {
   //   }
   // }
   // });
-  res.send({Api : "this post request works"})
+  res.send(req.body)
 });
 
 router.post("/verifyOtp", (req, res) => {
