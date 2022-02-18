@@ -6,7 +6,6 @@ var nodemailer = require('nodemailer');
 const app = express();
 const cors = require('cors');
 app.use(cors());
-app.options('/register', cors());
 app.options('*', cors());
 const router = express.Router();
 
@@ -67,7 +66,7 @@ router.post("/register", (req, res) => {
       //   res.send({userExists: 1})
       // }
     }
-  }
+  })
   // res.send(req.body)
 });
 
