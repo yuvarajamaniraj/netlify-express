@@ -61,8 +61,8 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
-      result = JSON.parse(JSON.stringify(result));
-      res.send({emailid: email, passz: password, res: result});
+      // result = JSON.parse(JSON.stringify(result));
+      // res.send({emailid: email, passz: password, res: result});
       // var val;
       // for (var key in result) {
       //   val = result[key];
@@ -84,9 +84,9 @@ router.post("/register", (req, res) => {
       // else {
       //   res.send({userExists: 1})
       // }
+      res.send(req.body)
     }
   })
-  // res.send(req.body)
 });
 
 router.post("/verifyOtp", (req, res) => {
