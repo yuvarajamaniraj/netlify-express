@@ -35,9 +35,9 @@ const db = mysql.createConnection({
   host: "remotemysql.com",
   username: "y39M6kKqGw",
   password: "rCDaLTRaap",
-  database: "y39M6kKqGw",
-  port: "3306",
 });
+// database: "y39M6kKqGw",
+// port: "3306",
 
 
 
