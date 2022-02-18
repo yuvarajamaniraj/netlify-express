@@ -54,7 +54,8 @@ router.post("/register", (req, res) => {
   const { email, password } = req.body;
   const verified = false;
   const otp = '';
-  pool.query(`SELECT * FROM users WHERE email='${email}'`,
+  pool.query('SELECT * FROM `users` WHERE `email` = ?',
+  [email],
   (err, result) => {
     if (err){
       res.send({error: err});
