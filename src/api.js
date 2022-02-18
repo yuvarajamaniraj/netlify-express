@@ -52,6 +52,7 @@ router.post("/register", (req, res) => {
     'Access-Control-Allow-Headers': "Authorization, Content-Type"
   })
   const { email, password } = req.body;
+  const value = JSON.parse(req.body)
   const verified = false;
   const otp = '';
   pool.query(`SELECT * FROM users WHERE email='${email}'`,
@@ -61,6 +62,13 @@ router.post("/register", (req, res) => {
       // throw err;
     }
     else{
+      value.forEach(element => {
+        if(element.Key == "email"){
+          email = element.value;
+        } else {
+          password = element.value;
+        }
+      });
       // result = JSON.parse(JSON.stringify(result));
       // res.send({emailid: email, passz: password, res: result});
       // var val;
@@ -84,7 +92,7 @@ router.post("/register", (req, res) => {
       // else {
       //   res.send({userExists: 1})
       // }
-      res.send(req.body.email)
+      res.send({em: email, pzx: password})
     }
   })
 });
