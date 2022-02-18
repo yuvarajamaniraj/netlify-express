@@ -1,6 +1,6 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 var nodemailer = require('nodemailer');
 
 const app = express();
@@ -31,14 +31,6 @@ const db_con = mysql.createPool({
   connect_timeout :10
 });
 
-var pool = mysql.createConnection({
-  host     : 'remotemysql.com',
-  port     :  3306,
-  user     : 'y39M6kKqGw',
-  password : 'rCDaLTRaap',
-  database : 'y39M6kKqGw',
-});
-
 const db = mysql.createConnection({
   host: "remotemysql.com",
   user: "y39M6kKqGw",
@@ -51,7 +43,7 @@ const db = mysql.createConnection({
 
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  pool.connect(function(err,result) {
+  db.connect(function(err,result) {
     if (err) throw err;
     else{
       res.send(result)
