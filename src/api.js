@@ -26,6 +26,22 @@ const db = mysql.createConnection({
   port: "3306",
 });
 
+router.get("/check_db_con", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  db.query('SELECT email FROM users', 
+  (err, result) => {
+    if(err){
+      res.send({db_error: err});
+    }
+    else {
+      res.status(200).send(result);
+    }
+  });
+  res.json({
+    Responses: "Api connection works properly!"
+  });
+});
+
 router.post("/register", (req, res) => {
   res.set({
     'Content-Type': 'application/json',
@@ -209,7 +225,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-app.use(`/.netlify/functions/api`, router);
+app.use(`/`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
