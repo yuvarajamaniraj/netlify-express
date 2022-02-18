@@ -84,7 +84,7 @@ router.post("/register", (req, res) => {
       // else {
       //   res.send({userExists: 1})
       // }
-      res.send(req.body)
+      res.send(req.body.email)
     }
   })
 });
