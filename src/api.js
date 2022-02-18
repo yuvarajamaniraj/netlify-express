@@ -33,7 +33,7 @@ const db_con = mysql.createPool({
 
 const db = mysql.createConnection({
   host: "remotemysql.com",
-  username: "y39M6kKqGw",
+  user: "y39M6kKqGw",
   password: "rCDaLTRaap",
 });
 // database: "y39M6kKqGw",
