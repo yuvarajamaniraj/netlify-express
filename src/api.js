@@ -25,31 +25,21 @@ var pool = mysql.createConnection({
   database : 'y39M6kKqGw',
 });
 
-const db = mysql.createConnection({
-  host: "remotemysql.com",
-  user: "y39M6kKqGw",
-  password: "rCDaLTRaap",
-});
-// database: "y39M6kKqGw",
-// port: "3306",
-
-
-
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   pool.connect(function(err,result) {
     if (err) throw err;
     else{
-      res.send(result)
-      // db.query('SELECT email FROM users', 
-      // (err, result) => {
-      //   if(err){
-      //     res.json({db_error: err});
-      //   }
-      //   else {
-      //     res.status(200).json(result);
-      //   }
-      // });
+      // res.send(result)
+      db.query('SELECT email FROM users', 
+      (err, result) => {
+        if(err){
+          res.json({db_error: err});
+        }
+        else {
+          res.status(200).json(result);
+        }
+      });
     }
   });
   
