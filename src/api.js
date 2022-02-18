@@ -43,19 +43,19 @@ const db = mysql.createConnection({
 
 router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  db.connect(function(err) {
+  db.connect(function(err,result) {
     if (err) throw err;
     else{
-     
-      db.query('SELECT email FROM users', 
-      (err, result) => {
-        if(err){
-          res.json({db_error: err});
-        }
-        else {
-          res.status(200).json(result);
-        }
-      });
+      res.send(result)
+      // db.query('SELECT email FROM users', 
+      // (err, result) => {
+      //   if(err){
+      //     res.json({db_error: err});
+      //   }
+      //   else {
+      //     res.status(200).json(result);
+      //   }
+      // });
     }
   });
   
