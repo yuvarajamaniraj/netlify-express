@@ -67,7 +67,7 @@ router.post("/register", (req, res) => {
           bodyStr += chunk.toString();
       });
       req.on("end",function(){
-          res.send(JSON.stringify(bodyStr));
+          res.send(JSON.stringify(req.body));
       });
       // result = JSON.parse(JSON.stringify(result));
       // res.send({emailid: email, passz: password, res: result});
