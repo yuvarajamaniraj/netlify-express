@@ -174,43 +174,44 @@ router.post("/login", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const { email, password } = req.body;
   const resResult = "";
-  db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
-  (err, result)=>{
-    if(err){
-      console.log(err);
-    }
-    else{
-      result = JSON.parse(JSON.stringify(result));
-      // console.log(result)
-      // res.send(result)
-      var val;
-      for (var key in result) {
-        val = result[key];
-        result = val;
-        for(key in result){
-          val = result[key];
-        }
-      if(val === 1){
-        db.query(`SELECT verified FROM users WHERE email='${email}' and password='${password}'`,
-        (err, result) => {
-          if(err){
-            console.log(err);
-          }
-          else{
-            result = JSON.parse(JSON.stringify(result));
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.json(result)
-          }
-        })
-      }
-      else {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json({user: "email does not exists"})
-      }
-    }
+  // db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
+  // (err, result)=>{
+  //   if(err){
+  //     console.log(err);
+  //   }
+  //   else{
+  //     result = JSON.parse(JSON.stringify(result));
+  //     // console.log(result)
+  //     // res.send(result)
+  //     var val;
+  //     for (var key in result) {
+  //       val = result[key];
+  //       result = val;
+  //       for(key in result){
+  //         val = result[key];
+  //       }
+  //     if(val === 1){
+  //       db.query(`SELECT verified FROM users WHERE email='${email}' and password='${password}'`,
+  //       (err, result) => {
+  //         if(err){
+  //           console.log(err);
+  //         }
+  //         else{
+  //           result = JSON.parse(JSON.stringify(result));
+  //           res.setHeader('Access-Control-Allow-Origin', '*');
+  //           res.json(result)
+  //         }
+  //       })
+  //     }
+  //     else {
+  //       res.setHeader('Access-Control-Allow-Origin', '*');
+  //       res.json({user: "email does not exists"})
+  //     }
+  res.send(req.body)
+    // }
     // console.log(val)
-    }
-  })
+  //   }
+  // })
   
 });
 
