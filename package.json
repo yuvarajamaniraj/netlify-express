@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "webpack --config=webpack.config.js",
-    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src"
+    "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src",
+    "push" : "git add . && git commit -m 'changed' && git push -U origin main"
   },
   "repository": {
     "type": "git",
