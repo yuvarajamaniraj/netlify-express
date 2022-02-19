@@ -29,7 +29,8 @@ router.get("/check_db_con", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   pool.connect(function(err,result) {
     if (err) throw err;
-    else{
+    else {
+      
       // res.send(result)
       pool.query('SELECT email FROM users', 
       (err, result) => {
@@ -61,41 +62,42 @@ router.post("/register", (req, res) => {
       });
       req.on("end",function(){
         values = JSON.stringify(bodyStr);
+        res.send(values);
       });
-  pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj'@'gmail.com`,
-  (err, result) => {
-    if (err){
-      res.send({error: err});
-      // throw err;
-    }
-    else{
-      res.send(result)
-      // result = JSON.parse(JSON.stringify(result));
-      // res.send({emailid: email, passz: password, res: result});
-      // var val;
-      // for (var key in result) {
-      //   val = result[key];
-      //   result = val;
-      //   for(key in result){
-      //     val = result[key];
-      //   }
-      // if(val === 0){
-      //   db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
-      //   [email, password, verified, otp],
-      //   (err, result) => {
-      //     if (err) {
-      //       console.log(err);
-      //     } else {
-      //       res.send({user: "created"});
-      //     }
-      //   })
-      // }
-      // else {
-      //   res.send({userExists: 1})
-      // }
-      // res.send({em: email, pzx: password})
-    }
-  })
+  // pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj'@'gmail.com`,
+  // (err, result) => {
+  //   if (err){
+  //     res.send({error: err});
+  //     // throw err;
+  //   }
+  //   else{
+  //     res.send(values)
+  //     // result = JSON.parse(JSON.stringify(result));
+  //     // res.send({emailid: email, passz: password, res: result});
+  //     // var val;
+  //     // for (var key in result) {
+  //     //   val = result[key];
+  //     //   result = val;
+  //     //   for(key in result){
+  //     //     val = result[key];
+  //     //   }
+  //     // if(val === 0){
+  //     //   db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+  //     //   [email, password, verified, otp],
+  //     //   (err, result) => {
+  //     //     if (err) {
+  //     //       console.log(err);
+  //     //     } else {
+  //     //       res.send({user: "created"});
+  //     //     }
+  //     //   })
+  //     // }
+  //     // else {
+  //     //   res.send({userExists: 1})
+  //     // }
+  //     // res.send({em: email, pzx: password})
+  //   }
+  // })
 });
 
 router.post("/verifyOtp", (req, res) => {
@@ -189,7 +191,7 @@ router.post("/login", (req, res) => {
         }
       if(val === 1){
         db.query(`SELECT verified FROM users WHERE email='${email}' and password='${password}'`,
-        (err, result)=>{
+        (err, result) => {
           if(err){
             console.log(err);
           }
