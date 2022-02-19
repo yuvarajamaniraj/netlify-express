@@ -57,13 +57,14 @@ router.post("/register", (req, res) => {
   const verified = false;
   const otp = '';
   var bodyStr = '';
-      req.on("data",function(chunk){
-          bodyStr += chunk.toString();
-      });
-      req.on("end",function(){
-        values = JSON.stringify(bodyStr);
-        res.send(values);
-      });
+  req.on("data",function(chunk){
+      bodyStr += chunk.toString();
+  });
+  req.on("end",function(){
+    values = JSON.stringify(bodyStr);
+    
+  });
+  res.send(values);
   // pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj'@'gmail.com`,
   // (err, result) => {
   //   if (err){
