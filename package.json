@@ -17,7 +17,7 @@
     "start": "webpack --config=webpack.config.js",
     "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src",
     "push" : "git add . && git commit -m 'changed' && git push -u origin master"
-  },
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/owenconti/netlify-express.git"
