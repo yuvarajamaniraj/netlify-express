@@ -56,44 +56,45 @@ router.post("/register", (req, res) => {
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  db.connect(function (err, result) {
-    if (err) res.send(err);
-    else {
-      res.send(result)
-      // db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
-      //   (err, result) => {
-      //     if (err) {
-      //       throw err;
-      //     }
-      //     else {
-      //       result = JSON.parse(JSON.stringify(result));
-      //       // res.send(result)
-      //       var val;
-      //       for (var key in result) {
-      //         val = result[key];
-      //         result = val;
-      //         for (key in result) {
-      //           val = result[key];
-      //         }
-      //         if (val === 0) {
-      //           db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
-      //             [email, password, verified, otp],
-      //             (err, result) => {
-      //               if (err) {
-      //                 console.log(err);
-      //               } else {
-      //                 res.send({ user: "created" });
-      //               }
-      //             })
-      //         }
-      //         else {
-      //           res.send({ userExists: 1 })
-      //         }
-      //       }
-      //     }
-      //   });
-    }
-    });
+  res.send(req.body)
+  // db.connect(function (err, result) {
+  //   if (err) res.send(err);
+  //   else {
+  //     res.send(result)
+  //     // db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
+  //     //   (err, result) => {
+  //     //     if (err) {
+  //     //       throw err;
+  //     //     }
+  //     //     else {
+  //     //       result = JSON.parse(JSON.stringify(result));
+  //     //       // res.send(result)
+  //     //       var val;
+  //     //       for (var key in result) {
+  //     //         val = result[key];
+  //     //         result = val;
+  //     //         for (key in result) {
+  //     //           val = result[key];
+  //     //         }
+  //     //         if (val === 0) {
+  //     //           db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+  //     //             [email, password, verified, otp],
+  //     //             (err, result) => {
+  //     //               if (err) {
+  //     //                 console.log(err);
+  //     //               } else {
+  //     //                 res.send({ user: "created" });
+  //     //               }
+  //     //             })
+  //     //         }
+  //     //         else {
+  //     //           res.send({ userExists: 1 })
+  //     //         }
+  //     //       }
+  //     //     }
+  //     //   });
+  //   }
+  //   });
 
 });
 router.post("/verifyOtp", (req, res) => {
