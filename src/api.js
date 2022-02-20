@@ -57,7 +57,7 @@ router.post("/register", (req, res) => {
   const verified = false;
   const otp = '';
   db.connect(function (err, result) {
-    if (err) throw err;
+    if (err) res.send(err);
     else {
       res.send(result)
       // db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
