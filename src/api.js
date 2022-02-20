@@ -135,8 +135,7 @@ var transporter = nodemailer.createTransport({
   service: 'Gmail',
 
   auth: {
-    user: 'websitefeedback.codestrix@gmail.com',
-    pass: 'CodeStrix@123',
+
   }
 });
 
@@ -224,7 +223,6 @@ router.get("/", (req, res) => {
   });
 });
 
-// app.use(cors({origin: 'https://yuvarajamaniraj.netlify.app'}));
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
