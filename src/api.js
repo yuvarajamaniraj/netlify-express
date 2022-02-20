@@ -48,7 +48,7 @@ router.get("/check_db_con", (req, res) => {
           }
         });
     }
-    conn.release()
+    conn.disconnect()
   })
 });
 
@@ -98,7 +98,7 @@ router.post("/register", (req, res) => {
           }
         });
     }
-    conn.release()
+    conn.disconnect()
   });
 });
 router.post("/verifyOtp", (req, res) => {
@@ -133,7 +133,8 @@ var transporter = nodemailer.createTransport({
   service: 'Gmail',
 
   auth: {
-
+    user: 'websitefeedback.codestrix@gmail.com',
+    pass: 'CodeStrix@123',
   }
 });
 
