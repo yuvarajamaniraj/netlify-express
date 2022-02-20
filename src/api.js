@@ -26,9 +26,6 @@ var pool = mysql.createPool({
   database        : 'y39M6kKqGw',
 });
 
-
-
-
 router.get("/check_db_con", (req, res) => {
   res.set({
     'Content-Type': 'application/json',
@@ -90,17 +87,18 @@ router.post("/register", (req, res) => {
                     if (err) {
                       console.log(err);
                     } else {
-                      res.send({ user: "created" });
+                      res.status(200).send({ user: "created" });
                     }
                   })
               }
               else {
-                res.send({ userExists: 1 })
+                res.status(200).send({ userExists: 1 })
               }
             }
           }
         });
     }
+    conn.release()
   });
 });
 router.post("/verifyOtp", (req, res) => {
