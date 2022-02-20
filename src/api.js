@@ -77,7 +77,7 @@ router.post("/register", (req, res) => {
   pool.getConnection(function (err, conn) {
     if (err) res.send(err);
     else {
-      res.send(result)
+      res.send(conn)
       // conn.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
       //   (err, result) => {
       //     if (err) {
