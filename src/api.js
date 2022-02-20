@@ -26,11 +26,11 @@ var pool = mysql.createConnection({
 });
 
 router.get("/check_db_con", (req, res) => {
-  res.setHeader(
+  res.set({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': "*",
     'Access-Control-Allow-Headers': "Authorization, Content-Type"
-    );
+  });
   pool.connect(function(err,result) {
     if (err) throw err;
     else {
