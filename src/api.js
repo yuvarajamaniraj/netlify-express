@@ -56,51 +56,45 @@ router.post("/register", (req, res) => {
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  var bodyStr = '';
-  req.on("data",function(chunk){
-      bodyStr += chunk.toString();
-  });
-  req.on("end",function(){
-    values = JSON.stringify(bodyStr);
-    
-  });
-  res.send(values);
-  // pool.query(`SELECT * FROM users WHERE email=yuvarajamaniraj'@'gmail.com`,
-  // (err, result) => {
-  //   if (err){
-  //     res.send({error: err});
-  //     // throw err;
-  //   }
-  //   else{
-  //     res.send(values)
-  //     // result = JSON.parse(JSON.stringify(result));
-  //     // res.send({emailid: email, passz: password, res: result});
-  //     // var val;
-  //     // for (var key in result) {
-  //     //   val = result[key];
-  //     //   result = val;
-  //     //   for(key in result){
-  //     //     val = result[key];
-  //     //   }
-  //     // if(val === 0){
-  //     //   db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
-  //     //   [email, password, verified, otp],
-  //     //   (err, result) => {
-  //     //     if (err) {
-  //     //       console.log(err);
-  //     //     } else {
-  //     //       res.send({user: "created"});
-  //     //     }
-  //     //   })
-  //     // }
-  //     // else {
-  //     //   res.send({userExists: 1})
-  //     // }
-  //     // res.send({em: email, pzx: password})
-  //   }
-  // })
-});
+  db.connect(function (err, result) {
+    if (err) throw err;
+    else {
+      db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
+        (err, result) => {
+          if (err) {
+            throw err;
+          }
+          else {
+            result = JSON.parse(JSON.stringify(result));
+            // res.send(result)
+            var val;
+            for (var key in result) {
+              val = result[key];
+              result = val;
+              for (key in result) {
+                val = result[key];
+              }
+              if (val === 0) {
+                db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+                  [email, password, verified, otp],
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.send({ user: "created" });
+                    }
+                  })
+              }
+              else {
+                res.send({ userExists: 1 })
+              }
+            }
+          }
+        });
+    }
+    });
 
+});
 router.post("/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
 const verified = false;
