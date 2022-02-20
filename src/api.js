@@ -40,29 +40,19 @@ router.get("/check_db_con", (req, res) => {
       res.send("error getting connection");
     }
     else {
-      
-      conn.connect(function (err, result) {
-        if (err) throw err;
-        else {
-          
-          // res.send(result)
-          conn.query('SELECT email FROM users',
-          (err, result) => {
-            if (err) {
-              res.json({ db_error: err });
-            }
-            else {
-              res.status(200).json(result);
-            }
-          });
-        }
-      });
-      conn.release()
+      // res.send(result)
+      conn.query('SELECT email FROM users',
+        (err, result) => {
+          if (err) {
+            res.json({ db_error: err });
+          }
+          else {
+            res.status(200).json(result);
+          }
+        });
     }
+    conn.release()
   })
-  
-  
-  
 });
 
 router.post("/register", (req, res) => {
