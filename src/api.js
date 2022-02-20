@@ -55,7 +55,7 @@ router.post("/register", (req, res) => {
   const verified = false;
   const otp = '';
   // res.send(req.body)
-  db.connect(function (err, result) {
+  pool.connect(function (err, result) {
     if (err) res.send(err);
     else {
       res.send(result)
