@@ -17,7 +17,7 @@ const otpGen = () => {
   }
   return OTP;
 }
-var pool = mysql.createPool({
+var pool = mysql.createConnection({
   host     : 'remotemysql.com',
   port     :  3306,
   user     : 'y39M6kKqGw',
