@@ -17,7 +17,7 @@ const otpGen = () => {
   }
   return OTP;
 }
-var pool = mysql.createConnection({
+var pool = mysql.createPool({
   host     : 'remotemysql.com',
   port     :  3306,
   user     : 'y39M6kKqGw',
@@ -25,12 +25,16 @@ var pool = mysql.createConnection({
   database : 'y39M6kKqGw',
 });
 
+
+
+
 router.get("/check_db_con", (req, res) => {
   res.set({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': "*",
     'Access-Control-Allow-Headers': "Authorization, Content-Type"
   });
+  
   pool.connect(function(err,result) {
     if (err) throw err;
     else {
@@ -103,13 +107,13 @@ const { email, otp } = req.body;
 const verified = false;
 // console.log(otp);
 
-db.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and otp='${otp}'`,
+pool.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and otp='${otp}'`,
 (err, result) => {
   if(err) {
     console.log("wrong otp");
   }
   else{
-    db.query(`SELECT verified FROM users WHERE email='${email}'`,
+    pool.query(`SELECT verified FROM users WHERE email='${email}'`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -150,7 +154,7 @@ transporter.sendMail(mailOptions, function(error, info){
     });
   } 
   else{
-    db.query(`UPDATE users SET otp=${newOtp} WHERE email='${tomail}'`,
+    pool.query(`UPDATE users SET otp=${newOtp} WHERE email='${tomail}'`,
     (err, result) => {
       if (err) {
         console.log(err);
