@@ -17,12 +17,13 @@ const otpGen = () => {
   }
   return OTP;
 }
-var pool = mysql.createConnection({
-  host     : 'remotemysql.com',
-  port     :  3306,
-  user     : 'y39M6kKqGw',
-  password : 'rCDaLTRaap',
-  database : 'y39M6kKqGw',
+var pool = mysql.createPool({
+  connectionLimit : 100,
+  host            : 'remotemysql.com',
+  port            :  3306,
+  user            : 'y39M6kKqGw',
+  password        : 'rCDaLTRaap',
+  database        : 'y39M6kKqGw',
 });
 
 
@@ -34,23 +35,33 @@ router.get("/check_db_con", (req, res) => {
     'Access-Control-Allow-Origin': "*",
     'Access-Control-Allow-Headers': "Authorization, Content-Type"
   });
-  
-  pool.connect(function(err,result) {
-    if (err) throw err;
+  pool.getConnection((err, conn) => {
+    if (err) {
+      res.send("error getting connection");
+    }
     else {
       
-      // res.send(result)
-      pool.query('SELECT email FROM users', 
-      (err, result) => {
-        if(err){
-          res.json({db_error: err});
-        }
+      conn.connect(function (err, result) {
+        if (err) throw err;
         else {
-          res.status(200).json(result);
+          
+          // res.send(result)
+          conn.query('SELECT email FROM users',
+          (err, result) => {
+            if (err) {
+              res.json({ db_error: err });
+            }
+            else {
+              res.status(200).json(result);
+            }
+          });
         }
       });
+      conn.release()
     }
-  });
+  })
+  
+  
   
 });
 
@@ -63,11 +74,11 @@ router.post("/register", (req, res) => {
   const verified = false;
   const otp = '';
   // res.send(req.body)
-  pool.connect(function (err, result) {
+  pool.getConnection(function (err, conn) {
     if (err) res.send(err);
     else {
       // res.send(result)
-      pool.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
+      conn.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
         (err, result) => {
           if (err) {
             throw err;
@@ -83,7 +94,7 @@ router.post("/register", (req, res) => {
                 val = result[key];
               }
               if (val === 0) {
-                pool.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+                conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
                   [email, password, verified, otp],
                   (err, result) => {
                     if (err) {
