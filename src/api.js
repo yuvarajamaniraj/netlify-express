@@ -48,19 +48,17 @@ router.get("/check_db_con", (req, res) => {
 
 router.post("/register", (req, res) => {
   res.set({
-    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': "*",
-    'Access-Control-Allow-Headers': "Authorization, Content-Type"
   })
   const { email, password } = req.body;
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  res.send(req.body)
-  // db.connect(function (err, result) {
-  //   if (err) res.send(err);
-  //   else {
-  //     res.send(result)
+  // res.send(req.body)
+  db.connect(function (err, result) {
+    if (err) res.send(err);
+    else {
+      res.send(result)
   //     // db.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
   //     //   (err, result) => {
   //     //     if (err) {
@@ -93,9 +91,8 @@ router.post("/register", (req, res) => {
   //     //       }
   //     //     }
   //     //   });
-  //   }
-  //   });
-
+    }
+  });
 });
 router.post("/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
