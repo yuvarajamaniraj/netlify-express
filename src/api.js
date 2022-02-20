@@ -79,7 +79,7 @@ router.post("/register", (req, res) => {
                 val = result[key];
               }
               if (val === 0) {
-                db.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+                pool.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
                   [email, password, verified, otp],
                   (err, result) => {
                     if (err) {
