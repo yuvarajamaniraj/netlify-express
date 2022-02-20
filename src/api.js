@@ -120,7 +120,7 @@ pool.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and
         console.log(err);
       } else {
         result = JSON.parse(JSON.stringify(result))
-        res.json(result);
+        res.status(200).json(result);
       }
     })
   }
