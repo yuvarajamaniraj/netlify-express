@@ -18,7 +18,7 @@ const otpGen = () => {
   return OTP;
 }
 var pool = mysql.createPool({
-  connectionLimit : 100,
+  connectionLimit : 10,
   host            : 'remotemysql.com',
   port            :  3306,
   user            : 'y39M6kKqGw',
@@ -48,7 +48,7 @@ router.get("/check_db_con", (req, res) => {
           }
         });
     }
-    conn.disconnect()
+    conn.release()
   })
 });
 
@@ -98,7 +98,8 @@ router.post("/register", (req, res) => {
           }
         });
     }
-    conn.disconnect()
+    conn.release()
+
   });
 });
 router.post("/verifyOtp", (req, res) => {
