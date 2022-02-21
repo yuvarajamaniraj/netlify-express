@@ -65,7 +65,7 @@ router.post("/register", (req, res) => {
     if (err) res.send(err);
     else {
       // res.send(str)
-      conn.query(`SELECT EXISTS (SELECT * FROM users email=?)`,[email],
+      conn.query('SELECT EXISTS (SELECT * FROM users email=`?`)',[email],
         (err, result) => {
           if (err) {
             throw err;
