@@ -128,7 +128,10 @@ pool.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and
 });
 });
 
-router.post(("/mail"),async (req,res)=>{
+router.post(("/mail"), async (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': "*",
+  })
 const tomail=req.body.tomail
 let localPart = tomail.split('@');
 const newOtp = otpGen(); 
