@@ -56,11 +56,11 @@ router.post("/register", (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': "*",
   })
-  const { email, password } = req.body;
-  const values = JSON.parse(req.body)
+  const { email, password } = JSON.parse(req.body);
+  // const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  res.send(values.email)
+  res.send(email)
   // pool.getConnection(function (err, conn) {
   //   if (err) res.send(err);
   //   else {
