@@ -60,11 +60,11 @@ router.post("/register", (req, res) => {
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  res.send(req.body)
-  // pool.getConnection(function (err, conn) {
-  //   if (err) res.send(err);
-  //   else {
-  //     // res.send(conn)
+  // res.send(req.body)
+  pool.getConnection(function (err, conn) {
+    if (err) res.send(err);
+    else {
+      res.send(conn)
   //     conn.query(`SELECT EXISTS(SELECT * FROM users WHERE email='${email}')`,
   //       (err, result) => {
   //         if (err) {
@@ -97,9 +97,9 @@ router.post("/register", (req, res) => {
   //           }
   //         }
   //       });
-  //   }
-  //   conn.release()
-  // });
+    }
+    conn.release()
+  });
 });
 router.post("/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
