@@ -60,7 +60,7 @@ router.post("/register", (req, res) => {
   const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  // res.send(req.body)
+  res.send(req.body)
   // pool.getConnection(function (err, conn) {
   //   if (err) res.send(err);
   //   else {
