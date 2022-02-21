@@ -132,51 +132,52 @@ router.post(("/mail"), (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': "*",
   })
-  const { tomail }=JSON.parse(req.body)
-const newOtp = otpGen(); 
-// res.send({email: tomail, OTP: newOtp})  
-var transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  const { tomail } = JSON.parse(req.body)
+  const newOtp = otpGen();
+  // res.send({email: tomail, OTP: newOtp})  
+  var transporter = nodemailer.createTransport({
+    service: 'Gmail',
 
-  auth: {
-    user: 'websitefeedback.codestrix@gmail.com',
-    pass: 'CodeStrix@123',
-  }
-});
+    auth: {
+      user: 'websitefeedback.codestrix@gmail.com',
+      pass: 'CodeStrix@123',
+    }
+  });
 
-var mailOptions = {
+  var mailOptions = {
     from: 'websitefeedback.codestrix@gmail.com',
-  to: tomail,
-  subject: 'Verification for Codestrix account',
-  text: `your OTP for Verification is ${newOtp}`       
-};
+    to: tomail,
+    subject: 'Verification for Codestrix account',
+    text: `your OTP for Verification is ${newOtp}`
+  };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    res.json({
-      error: error,
-      msg: 'fail'
-    });
-  } 
-  else {
-    pool.getConnection(function (err, conn) {
-      if (err) res.send(err);
-      else {
-        conn.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?', [newOtp, tomail],
-          (err, result) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("otp stored");
-            }
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      res.json({
+        error: error,
+        msg: 'fail'
+      });
+    }
+    else {
+      pool.getConnection(function (err, conn) {
+        if (err) res.send(err);
+        else {
+          conn.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?', [newOtp, tomail],
+            (err, result) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("otp stored");
+              }
+            })
+          res.json({
+            msg: 'success'
           })
-        res.json({
-          msg: 'success'
-        })
-      }
-    });
-  }
+        }
+      });
+    }
 
+  })
 })
 
 

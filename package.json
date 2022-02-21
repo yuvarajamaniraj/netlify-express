@@ -9,15 +9,15 @@
     "express": "^4.16.4",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "netlify-lambda": "^1.4.3",
+    "netlify-lambda": "^1.6.3",
     "nodemailer": "^6.7.2",
     "serverless-http": "^1.9.1"
   },
   "scripts": {
-    "start": "webpack --config=webpack.config.js",
+    "start": "netlify-lambda serve src",
     "build": "NODE_ENV=production ./node_modules/.bin/netlify-lambda build src",
-    "push" : "git add . && git commit -m 'changed' && git push -u origin master"
-  }, 
+    "push": "git add . && git commit -m 'changed' && git push -u origin master"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/owenconti/netlify-express.git"
