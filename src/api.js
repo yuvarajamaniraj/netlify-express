@@ -81,7 +81,7 @@ router.post("/register", (req, res) => {
                 val = result[key];
               }
             }
-            res.send(val);
+            res.send({ cal: val });
   //             if (val === 0) {
   //               conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
   //                 [email, password, verified, otp],
