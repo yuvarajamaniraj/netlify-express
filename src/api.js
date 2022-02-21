@@ -105,7 +105,7 @@ router.post("/register", (req, res) => {
   });
 });
 router.post("/verifyOtp", (req, res) => {
-  const { email, otp } = req.body;
+  const { email, otp } = JSON.parse(req.body);
   const verified = false;
   // console.log(otp);
   pool.getConnection(function (err, conn) {
