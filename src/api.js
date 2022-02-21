@@ -82,21 +82,21 @@ router.post("/register", (req, res) => {
                 val = result[key];
               }
             
-            res.send({ value : val });
-              // if (val === 0) {
-              //   conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
-              //     [email, password, verified, otp],
-              //     (err, result) => {
-              //       if (err) {
-              //         console.log(err);
-              //       } else {
-              //         res.status(200).send({ user: "created" });
-              //       }
-              //     })
-              // }
-              // else {
-              //   res.status(200).send({ userExists: 1 })
-              // }
+            // res.send({ value : val });
+              if (val === 0) {
+                conn.query('INSERT INTO `users` (`email`, `password`, `verified`, `otp`) VALUES (?,?,?,?)',
+                  [email, password, verified, otp],
+                  (err, result) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.status(200).send({ user: "created" });
+                    }
+                  })
+              }
+              else {
+                res.status(200).send({ userExists: 1 })
+              }
             }
           }
         });
