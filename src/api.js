@@ -158,20 +158,24 @@ transporter.sendMail(mailOptions, function(error, info){
       msg: 'fail'
     });
   } 
-  else{
-    pool.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?',[newOtp, tomail],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("otp stored");
+  else {
+    pool.getConnection(function (err, conn) {
+      if (err) res.send(err);
+      else {
+        pool.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?', [newOtp, tomail],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("otp stored");
+            }
+          })
+        res.json({
+          msg: 'success'
+        })
       }
-    })
-    res.json({
-      msg: 'success'
-    })
+    });
   }
-});
 
 })
 
