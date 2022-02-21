@@ -142,7 +142,7 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: process.env.FromMail,
+    from: 'websitefeedback.codestrix@gmail.com',
   to: tomail,
   subject: 'Verification for Codestrix account',
   text: `your OTP for Verification is ${newOtp}`       
@@ -156,7 +156,7 @@ transporter.sendMail(mailOptions, function(error, info){
     });
   } 
   else{
-    pool.query(`UPDATE users SET otp=${newOtp} WHERE email='${tomail}'`,
+    pool.query('UPDATE users SET `otp` = ? WHERE `email`=?',[newOtp, tomail],
     (err, result) => {
       if (err) {
         console.log(err);
