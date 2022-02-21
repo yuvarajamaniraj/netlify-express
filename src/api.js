@@ -71,15 +71,17 @@ router.post("/register", (req, res) => {
             throw err;
           }
           else {
-            result = JSON.parse(JSON.stringify(result));
-            res.send(result)
-  //           var val;
-  //           for (var key in result) {
-  //             val = result[key];
-  //             result = val;
-  //             for (key in result) {
-  //               val = result[key];
-  //             }
+            // result = JSON.parse(JSON.stringify(result));
+            // res.send(result)
+            var val;
+            for (var key in result) {
+              val = result[key];
+              result = val;
+              for (key in result) {
+                val = result[key];
+              }
+            }
+            res.send(val);
   //             if (val === 0) {
   //               conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
   //                 [email, password, verified, otp],
