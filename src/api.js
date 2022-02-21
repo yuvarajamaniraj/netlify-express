@@ -132,7 +132,7 @@ router.post(("/mail"), (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': "*",
   })
-const tomail=JSON.parse(req.body.tomail)
+  const { tomail }=JSON.parse(req.body)
 const newOtp = otpGen(); 
 res.send({email: tomail, OTP: newOtp})  
 // var transporter = nodemailer.createTransport({
