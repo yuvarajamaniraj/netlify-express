@@ -162,7 +162,7 @@ transporter.sendMail(mailOptions, function(error, info){
     pool.getConnection(function (err, conn) {
       if (err) res.send(err);
       else {
-        pool.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?', [newOtp, tomail],
+        conn.query('UPDATE `users` SET `otp` = ? WHERE `email`= ?', [newOtp, tomail],
           (err, result) => {
             if (err) {
               console.log(err);
