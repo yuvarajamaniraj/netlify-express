@@ -60,48 +60,48 @@ router.post("/register", (req, res) => {
   // const values = JSON.parse(req.body)
   const verified = false;
   const otp = '';
-  res.send(email)
-  // pool.getConnection(function (err, conn) {
-  //   if (err) res.send(err);
-  //   else {
-  //     // res.send(str)
-  //     conn.query(`SELECT EXISTS (SELECT * FROM users )`,
-  //       (err, result) => {
-  //         if (err) {
-  //           throw err;
-  //         }
-  //         else {
-  //           // result = JSON.parse(JSON.stringify(result));
-  //           // res.send(result)
-  //           var val;
-  //           for (var key in result) {
-  //             val = result[key];
-  //             result = val;
-  //             for (key in result) {
-  //               val = result[key];
-  //             }
+  // res.send(email)
+  pool.getConnection(function (err, conn) {
+    if (err) res.send(err);
+    else {
+      // res.send(str)
+      conn.query(`SELECT EXISTS (SELECT * FROM users email='${email}')`,
+        (err, result) => {
+          if (err) {
+            throw err;
+          }
+          else {
+            // result = JSON.parse(JSON.stringify(result));
+            // res.send(result)
+            var val;
+            for (var key in result) {
+              val = result[key];
+              result = val;
+              for (key in result) {
+                val = result[key];
+              }
             
-  //           res.send({ value : val });
-  //             // if (val === 0) {
-  //             //   conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
-  //             //     [email, password, verified, otp],
-  //             //     (err, result) => {
-  //             //       if (err) {
-  //             //         console.log(err);
-  //             //       } else {
-  //             //         res.status(200).send({ user: "created" });
-  //             //       }
-  //             //     })
-  //             // }
-  //             // else {
-  //             //   res.status(200).send({ userExists: 1 })
-  //             // }
-  //           }
-  //         }
-  //       });
-  //   }
-  //   conn.release()
-  // });
+            res.send({ value : val });
+              // if (val === 0) {
+              //   conn.query("INSERT INTO users (email, password, verified, otp) VALUES (?,?,?,?)",
+              //     [email, password, verified, otp],
+              //     (err, result) => {
+              //       if (err) {
+              //         console.log(err);
+              //       } else {
+              //         res.status(200).send({ user: "created" });
+              //       }
+              //     })
+              // }
+              // else {
+              //   res.status(200).send({ userExists: 1 })
+              // }
+            }
+          }
+        });
+    }
+    conn.release()
+  });
 });
 router.post("/verifyOtp", (req, res) => {
 const { email, otp } = req.body;
