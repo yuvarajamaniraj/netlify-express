@@ -105,28 +105,32 @@ router.post("/register", (req, res) => {
   });
 });
 router.post("/verifyOtp", (req, res) => {
-const { email, otp } = req.body;
-const verified = false;
-// console.log(otp);
-
-pool.query(`UPDATE users SET verified=${true}, otp='' WHERE email='${email}' and otp='${otp}'`,
-(err, result) => {
-  if(err) {
-    console.log("wrong otp");
-  }
-  else{
-    pool.query(`SELECT verified FROM users WHERE email='${email}'`,
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        result = JSON.parse(JSON.stringify(result))
-        res.status(200).json(result);
-      }
-    })
-  }
-});
-});
+  const { email, otp } = req.body;
+  const verified = false;
+  // console.log(otp);
+  pool.getConnection(function (err, conn) {
+    if (err) res.send(err);
+    else {
+      conn.query('UPDATE `users` SET `verified` = ?, `otp` = ? WHERE `email` = ? and `otp` = ?',[true,'',email,otp],
+        (err, result) => {
+          if (err) {
+            console.log("wrong otp");
+          }
+          else {
+            conn.query('SELECT `verified` FROM `users` WHERE `email` = ?',[email],
+              (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  result = JSON.parse(JSON.stringify(result))
+                  res.status(200).json(result);
+                }
+              })
+          }
+        });
+    }
+  });
+})
 
 router.post(("/mail"), (req, res) => {
   res.set({
