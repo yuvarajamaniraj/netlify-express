@@ -82,7 +82,7 @@ router.post("/check_post_req", (req, res) => {
     'Access-Control-Allow-Origin': "*",
   })
 //   const { email, password } = JSON.parse(req.body);
-  res.send(JSON.parse(JSON.stringify(req.body)));
+  res.send(JSON.parse(req.body));
 //   pool.getConnection(function (err, conn) {
 //     if (err) res.send(err);
 //     else {
