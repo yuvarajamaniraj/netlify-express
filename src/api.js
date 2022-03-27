@@ -81,6 +81,32 @@ router.post("/register", (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': "*",
   })
+//   const { email, password } = JSON.parse(req.body);
+  res.send(JSON.parse(JSON.stringify(req.body)));
+//   pool.getConnection(function (err, conn) {
+//     if (err) res.send(err);
+//     else {
+//       // res.send(str)
+//       conn.query('SELECT EXISTS (SELECT * FROM `users` WHERE `email` = ?)',
+//         [email],
+//         (err, result) => {
+//           if (err) {
+//             throw err;
+//           }
+//         else {
+//             result = JSON.parse(JSON.stringify(result));
+//             res.send(result)
+//           }
+//         });
+//     }
+    conn.release()
+  });
+});
+
+router.post("/register", (req, res) => {
+  res.set({
+    'Access-Control-Allow-Origin': "*",
+  })
   const { email, password } = JSON.parse(req.body);
   // const values = JSON.parse(req.body)
   const verified = false;
