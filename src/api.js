@@ -77,7 +77,7 @@ router.get("/check_db_qr_con", (req, res) => {
   })
 });
 
-router.post("/register", (req, res) => {
+router.post("/check_post_req", (req, res) => {
   res.set({
     'Access-Control-Allow-Origin': "*",
   })
