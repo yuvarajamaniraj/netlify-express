@@ -101,7 +101,6 @@ router.post("/check_post_req", (req, res) => {
 //     }
     conn.release()
   });
-});
 
 router.post("/register", (req, res) => {
   res.set({
